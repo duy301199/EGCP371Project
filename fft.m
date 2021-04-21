@@ -8,10 +8,10 @@ clear all;
 [y,Fs] = audioread('audiotesting.wav');
 info = audioinfo('audiotesting.wav');
 
-% Play
+% Play audio file
 sound(y,Fs);
 
-% Create a t vector that is as long as the duration of the audio file
+% Creates a t vector that is as long as the duration of the audio file
 t = 0:seconds(1/Fs):seconds(info.Duration);
 t = t(1:end-1);
 
