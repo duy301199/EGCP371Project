@@ -5,8 +5,8 @@ close all;
 clear all;
 
 %% Read a signal from an audio file
-[y,Fs] = audioread('Rockm.wav');
-info = audioinfo('Rockm.wav');
+[y,Fs] = audioread('audiotesting.wav');
+info = audioinfo('audiotesting.wav');
 
 
 %% Create a t vector that is as long as the duration of the audio file
@@ -15,17 +15,20 @@ t = t(1:end-1);
 
 
 %% Add noise
-noisy_signal = awgn(y,20);
-
+noisy_signal = awgn(y,15,'measured');
 
 %% Denoise the signal
-fd = wdenoise(noisy_signal,5,'Wavelet','sym4');
+wname = 'sym4';
+level = 5;
+method = 'SURE';
+fd = wdenoise(noisy_signal,level,'Wavelet',wname,'DenoisingMethod',method,'ThresholdRule','Soft','NoiseEstimate','LevelIndependent');
 
+
+%% Plot the data
 figure;
-subplot(2,1,1);
+subplot(3,1,1);
+plot(t,y);axis tight; grid on; title('Original Signal');
+subplot(3,1,2);
 plot(t,noisy_signal);axis tight; grid on; title('Noisy Signal');
-subplot(2,1,2)
-plot(fd);axis tight; grid on;
-
-%% Play audio
-% sound(fd,Fs);
+subplot(3,1,3)
+plot(t,fd);axis tight; grid on; title('Clean Noise')
