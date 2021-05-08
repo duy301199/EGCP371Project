@@ -16,8 +16,6 @@ t = t(1:end-1);
 
 %% Add noise
 noisy_signal = awgn(y,12,'measured');
-filename = 'noisy_audio.wav';
-audiowrite(filename, noisy_signal, Fs);
 
 
 %% Parameters
