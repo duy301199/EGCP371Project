@@ -53,7 +53,7 @@ ylabel('Audio Signal')
 % Plots the wave of the clean audio
 subplot(4,2,2);
 plot(t,inv)
-title('Signal of Original Audio')
+title('Signal of Denoised Audio')
 xlabel('Time (t)')
 ylabel('Audio Signal')
 
@@ -77,7 +77,7 @@ ylabel('Amplitude')
 % Plots the amplitude spectrum of the clean signal
 subplot(4,2,6);
 plot(x_orig,P2_clean) 
-title('Amplitude Spectrum of Original Audio')
+title('Amplitude Spectrum of Denoised Audio')
 xlabel('f (Hz)')
 ylabel('Amplitude')
 
