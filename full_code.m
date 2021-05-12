@@ -76,7 +76,8 @@ P2_noisy2 = abs(noisyFFT);
 
 
 %% Filter out the noise
-threshold = 300; % Threshold choices which signals to remove
+threshold = 0.003; % Threshold choices which signals to remove
+threshold = threshold * 100000;
 selector = P2_noisy2 > threshold; % Anything below the threshold is removed
 P2_clean = P2_noisy2.*selector;
 Y_clean = selector.*noisyFFT;
@@ -148,6 +149,38 @@ level = 5; % Keep this at 5
 rule = 'Soft'; % Threshold Rule(depends on denoising method): BlockJS(James-Stein); Sure,Minimax,Universal Threshold(Soft or Hard); Bayes(Median, Mean, Soft, or Hard); FDR(Hard)
 
 
+%% Decompose original signal
+[C1, L1] = wavedec(y,level,wname);
+approx1 = wrcoef('a',C1,L1,wname,level);
+cd10 = wrcoef('d',C1,L1,wname,level);
+cd9 = wrcoef('d',C1,L1,wname,4);
+cd8 = wrcoef('d',C1,L1,wname,3);
+cd7 = wrcoef('d',C1,L1,wname,2);
+cd6 = wrcoef('d',C1,L1,wname,1);
+
+
+% Plot graphs of original signal
+figure(2);
+subplot(6,3,1)
+plot(approx1)
+title('Original Approximation Coefficients')
+subplot(6,3,4)
+plot(cd10)
+title('Level 5 Detail Coefficients')
+subplot(6,3,7)
+plot(cd9)
+title('Level 4 Detail Coefficients')
+subplot(6,3,10)
+plot(cd8)
+title('Level 3 Detail Coefficients')
+subplot(6,3,13)
+plot(cd7)
+title('Level 2 Detail Coefficients')
+subplot(6,3,16)
+plot(cd6)
+title('Level 1 Detail Coefficients')
+
+
 %% Decompose noisy signal using Discrete Wavelet Transform
 dwtmode('per','nodisplay');
 [C, L] = wavedec(noisy_signal,level,wname);
@@ -160,55 +193,23 @@ cd1 = wrcoef('d',C,L,wname,1);
 
 
 % Plot graphs of noisy signal
-figure(2);
-subplot(6,3,1)
+subplot(6,3,2)
 plot(approx)
 title('Noisy Approximation Coefficients')
-subplot(6,3,4)
+subplot(6,3,5)
 plot(cd5)
 title('Level 5 Detail Coefficients')
-subplot(6,3,7)
+subplot(6,3,8)
 plot(cd4)
 title('Level 4 Detail Coefficients')
-subplot(6,3,10)
+subplot(6,3,11)
 plot(cd3)
 title('Level 3 Detail Coefficients')
-subplot(6,3,13)
+subplot(6,3,14)
 plot(cd2)
 title('Level 2 Detail Coefficients')
-subplot(6,3,16)
-plot(cd1)
-title('Level 1 Detail Coefficients')
-
-
-%% Decompose original signal
-[C1, L1] = wavedec(y,level,wname);
-approx1 = wrcoef('a',C1,L1,wname,level);
-cd10 = wrcoef('d',C1,L1,wname,level);
-cd9 = wrcoef('d',C1,L1,wname,4);
-cd8 = wrcoef('d',C1,L1,wname,3);
-cd7 = wrcoef('d',C1,L1,wname,2);
-cd6 = wrcoef('d',C1,L1,wname,1);
-
-
-% Plot graphs of original signal
-subplot(6,3,2)
-plot(approx1)
-title('Original Approximation Coefficients')
-subplot(6,3,5)
-plot(cd10)
-title('Level 5 Detail Coefficients')
-subplot(6,3,8)
-plot(cd9)
-title('Level 4 Detail Coefficients')
-subplot(6,3,11)
-plot(cd8)
-title('Level 3 Detail Coefficients')
-subplot(6,3,14)
-plot(cd7)
-title('Level 2 Detail Coefficients')
 subplot(6,3,17)
-plot(cd6)
+plot(cd1)
 title('Level 1 Detail Coefficients')
 
 
@@ -242,5 +243,4 @@ title('Level 2 Detail Coefficients')
 subplot(6,3,18)
 plot(cd11)
 title('Level 1 Detail Coefficients')
-
 
