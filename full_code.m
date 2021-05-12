@@ -92,7 +92,7 @@ P1_clean(2:end-1) = 2*P1_clean(2:end-1);
 % Plots the wave of the audio file
 subplot(3,2,1);
 plot(t,y)
-title('Original signal of',num2str(a),'Audio')
+title(['Original signal of ',num2str(a),'Audio'])
 xlabel('Time (t)')
 ylabel('Audio Signal')
 grid on
@@ -101,7 +101,7 @@ grid on
 % Plots the noisy signal
 subplot(3,2,3);
 plot(t,noisy_signal)
-title('Noisy signal of',num2str(a),'Audio')
+title(['Noisy signal of ',num2str(a),'Audio'])
 xlabel('Time (t)')
 ylabel('Audio Signal')
 grid on
@@ -110,7 +110,7 @@ grid on
 % Plots the wave of the clean audio
 subplot(3,2,5);
 plot(t,inv)
-title('Clean signal of',num2str(a),'Audio')
+title(['Clean signal of ',num2str(a),'Audio'])
 xlabel('Time (t)')
 ylabel('Audio Signal')
 grid on
@@ -119,7 +119,7 @@ grid on
 % Plots the amplitude spectrum of the original signal
 subplot(3,2,2);
 plot(f,P1_orig) 
-title('Amplitude Spectrum of ', num2str(a),'Original Audio')
+title(['Amplitude Spectrum of ', num2str(a),'Original Audio'])
 xlabel('f (Hz)')
 ylabel('Amplitude')
 grid on
@@ -128,7 +128,7 @@ grid on
 % Plots the amplitude spectrum of the noisy signal
 subplot(3,2,4);
 plot(f,P1_noisy) 
-title('Amplitude Spectrum of', num2str(a), 'Noisy Audio')
+title(['Amplitude Spectrum of ', num2str(a), 'Noisy Audio'])
 xlabel('f (Hz)')
 ylabel('Amplitude')
 grid on
@@ -137,7 +137,7 @@ grid on
 % Plots the amplitude spectrum of the clean signal
 subplot(3,2,6);
 plot(f,P1_clean) 
-title('Amplitude Spectrum of',num2str(a),'Clean Audio')
+title(['Amplitude Spectrum of ',num2str(a),'Clean Audio'])
 xlabel('f (Hz)')
 ylabel('Amplitude')
 grid on
