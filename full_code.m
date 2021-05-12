@@ -18,26 +18,26 @@ choice = menu('Choose an option for type of song','a. Rock','b. Trap','c. StarWa
 if (choice == 1)
     [y,Fs] = audioread('Rockm.wav');
     info = audioinfo('Rockm.wav');
-a = 'Original Rock ';
+a = 'Rock ';
 
 % If the audience wants to choose Trap music
 elseif (choice == 2)
     [y,Fs] = audioread('trapPiano.wav'); 
     info = audioinfo('trapPiano.wav');
- a = 'Original Trap Piano ';
+ a = 'Trap Piano ';
 
 % If the audience wants to choose StarWar music
 elseif (choice == 3)
     [y,Fs] = audioread('StarWars60.wav'); 
     info = audioinfo('StarWars60.wav');
-    	 a = 'Original Star War ';
+    	 a = 'Star War ';
      
 
 % If the audience wants to choose Concerto music  
 elseif (choice == 4)
     [y,Fs] = audioread('Concerto.wav'); 
     info = audioinfo('Concerto.wav');
- 	 a = 'Original Concerto ';
+ 	 a = 'Concerto ';
 end
 
 
@@ -50,7 +50,7 @@ t = 0:seconds(1/Fs):seconds(info.Duration);
 t = t(1:end-1);
 
 
-%% Convert 2D audio to 1D audio(so that we can use wavelet analysis on it)
+%% Convert 2D audio vector to 1D audio vector (so that we can use wavelet analysis on it)
 size = numel(t);
 y = y(1:size);
 
@@ -92,7 +92,7 @@ P1_clean(2:end-1) = 2*P1_clean(2:end-1);
 % Plots the wave of the audio file
 subplot(3,2,1);
 plot(t,y)
-title('Signal of Original Audio')
+title('Original signal of',num2str(a),'Audio')
 xlabel('Time (t)')
 ylabel('Audio Signal')
 grid on
@@ -101,7 +101,7 @@ grid on
 % Plots the noisy signal
 subplot(3,2,3);
 plot(t,noisy_signal)
-title('Signal of Noisy Audio')
+title('Noisy signal of',num2str(a),'Audio')
 xlabel('Time (t)')
 ylabel('Audio Signal')
 grid on
@@ -110,7 +110,7 @@ grid on
 % Plots the wave of the clean audio
 subplot(3,2,5);
 plot(t,inv)
-title('Signal of Clean Audio')
+title('Clean signal of',num2str(a),'Audio')
 xlabel('Time (t)')
 ylabel('Audio Signal')
 grid on
@@ -119,7 +119,7 @@ grid on
 % Plots the amplitude spectrum of the original signal
 subplot(3,2,2);
 plot(f,P1_orig) 
-title('Amplitude Spectrum of Original Audio')
+title('Amplitude Spectrum of ', num2str(a),'Original Audio')
 xlabel('f (Hz)')
 ylabel('Amplitude')
 grid on
@@ -128,7 +128,7 @@ grid on
 % Plots the amplitude spectrum of the noisy signal
 subplot(3,2,4);
 plot(f,P1_noisy) 
-title('Amplitude Spectrum of Noisy Audio')
+title('Amplitude Spectrum of', num2str(a), 'Noisy Audio')
 xlabel('f (Hz)')
 ylabel('Amplitude')
 grid on
@@ -137,7 +137,7 @@ grid on
 % Plots the amplitude spectrum of the clean signal
 subplot(3,2,6);
 plot(f,P1_clean) 
-title('Amplitude Spectrum of Clean Audio')
+title('Amplitude Spectrum of',num2str(a),'Clean Audio')
 xlabel('f (Hz)')
 ylabel('Amplitude')
 grid on
@@ -148,7 +148,7 @@ grid on
 method = 'Sure'; % Denoising Method: Bayes, BlockJS, FDR, Minimax, Sure, or UniversalThreshold
 wname = 'sym8'; % Name of Wavelet: haar, dbN, fkN, coifN, or symN where N is a positive integer
 level = 5; % Keep this at 5
-rule = 'Soft'; % Threshold Rule(depends on denoising method): BlockJS(James-Stein); Sure,Minimax,Universal Threshold(Soft or Hard); Bayes(Median, Mean, Soft, or Hard); FDR(Hard)
+rule = 'Soft'; % Threshold Rule(depends on denoising method): BlockJS(James-Stein);Sure,Minimax,Universal Threshold(Soft or Hard); Bayes(Median, Mean, Soft, or Hard); FDR(Hard)
 
 
 %% Decompose original signal
