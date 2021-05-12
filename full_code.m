@@ -76,7 +76,7 @@ P2_noisy2 = abs(noisyFFT);
 
 
 %% Filter out the noise
-threshold = 0.003; % Threshold choices which signals to remove
+threshold = 0.004; % Threshold choices which signals to remove
 threshold = threshold * 100000;
 selector = P2_noisy2 > threshold; % Anything below the threshold is removed
 P2_clean = P2_noisy2.*selector;
@@ -244,3 +244,7 @@ subplot(6,3,18)
 plot(cd11)
 title('Level 1 Detail Coefficients')
 
+
+%% Compare the noise loss from left to right signal
+orig_to_noise = snr(y,noisy_signal);
+denoise_to_noise = snr(fd,noisy_signal);
