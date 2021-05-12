@@ -1,4 +1,6 @@
 %%EGCP371-Group 2 Matlab Code
+% By Duy Nguyen, Isaiah Odunze, Paul Nguyen, and Jose Solano
+%%
 clc;
 close all;
 clear all;
